@@ -47,3 +47,103 @@ body { background-color: var(--bg-dark); color: var(--text-main); overflow-x: hi
 .card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .open-article-btn { background: none; border: none; color: var(--accent-blue); font-weight: 600; cursor: pointer; text-align: left; padding: 0; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; }
 .open-article-btn:hover { color: #60a5fa; }
+/* ==========================================
+   MOBILE-RESPONSIVE INTERFACE PATCH
+   ========================================== */
+@media screen and (max-width: 768px) {
+    /* 1. Change layout container from side-by-side to stacked */
+    .app-container {
+        flex-direction: column !important;
+        padding: 10px !important;
+        height: auto !important;
+        overflow-y: auto !important;
+    }
+
+    /* 2. Turn Sidebar into a Top Navigation Panel */
+    .sidebar {
+        width: 100% !important;
+        min-width: 100% !important;
+        border-right: none !important;
+        border-bottom: 2px solid #2e2e38 !important;
+        padding: 12px 5px !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* Stack logo and database elements cleanly */
+    .sidebar h2 {
+        font-size: 1.3rem !important;
+        text-align: center !important;
+        margin-bottom: 10px !important;
+    }
+
+    #sync-live-btn {
+        width: 100% !important;
+        justify-content: center !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* Hide decorative elements to save vertical room */
+    .nav-divider, .sidebar h3 {
+        display: none !important;
+    }
+
+    /* 3. Make Category Pillars scroll horizontally on swipe */
+    .pillar-list {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 8px !important;
+        overflow-x: auto !important;
+        padding-bottom: 8px !important;
+        margin-top: 5px !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .pillar-list li {
+        white-space: nowrap !important; /* Prevents text from breaking onto two lines */
+        padding: 8px 14px !important;
+        font-size: 0.9rem !important;
+        border-radius: 20px !important;
+        background: #1e1e24 !important;
+    }
+
+    /* 4. Fix Source Filtering Badges layout */
+    .source-badges {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+        margin-bottom: 15px !important;
+        justify-content: flex-start !important;
+    }
+
+    .source-badges .badge {
+        font-size: 0.75rem !important;
+        padding: 4px 10px !important;
+    }
+
+    /* 5. Force Articles Grid into a single column stack */
+    .feed-window {
+        padding: 0 !important;
+    }
+
+    .articles-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+
+    .card {
+        padding: 15px !important;
+    }
+
+    .card h3 {
+        font-size: 1.2rem !important;
+        line-height: 1.4 !important;
+    }
+
+    /* 6. Adjust Reader Modal for easy reading */
+    .reader-modal {
+        width: 95% !important;
+        max-height: 90vh !important;
+        padding: 15px !important;
+        margin: auto !important;
+    }
+}
