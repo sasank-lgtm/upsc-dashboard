@@ -41,18 +41,27 @@ function renderDashboard() {
         grid.appendChild(card);
     });
 }
-
 function openInAppReader(article) {
     const modal = document.getElementById('article-reader-overlay');
     const body = document.getElementById('reader-modal-body');
     
     if (modal && body) {
-        // Use textContent for safety to bypass Security Policy blocks
-        body.innerHTML = `<h1>${article.title}</h1><p>${article.fullAnalysis}</p>`;
+        body.innerHTML = `
+            <h1 style="color:#1e293b;">${article.title}</h1>
+            <p style="color:#64748b;"><strong>Source:</strong> ${article.source} | <strong>Date:</strong> ${article.time}</p>
+            <hr>
+            <div style="margin:20px 0; line-height:1.6;">${article.fullAnalysis}</div>
+            <div style="background:#f1f5f9; padding:15px; border-radius:8px;">
+                <h3>Read More</h3>
+                <a href="${article.sourceUrl}" target="_blank" style="color:#2563eb;">Click here to visit the original source</a>
+                <h3 style="margin-top:20px;">Quick Fact Check</h3>
+                <p>${article.prelimsSummary.replace(/\\n/g, '<br>')}</p>
+            </div>
+            <button onclick="document.getElementById('article-reader-overlay').style.display='none'" style="margin-top:20px; width:100%; padding:10px;">Close Analysis</button>
+        `;
         modal.style.display = 'flex';
     }
 }
-
 document.addEventListener('DOMContentLoaded', () => {
     loadData();
     document.querySelectorAll('.pillar-list li').forEach(li => {
