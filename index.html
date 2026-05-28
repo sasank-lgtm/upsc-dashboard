@@ -3,29 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UPSC 2026 Core Portal</title>
+    <title>UPSC 2026 Core Current Affairs Portal</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header class="navbar">
-        <div class="logo"><i class="fa-solid fa-graduation-cap"></i> UPSC 2026 Deck</div>
+        <div class="logo"><i class="fa-solid fa-graduation-cap"></i> UPSC CSE 2026 CA Deck</div>
         <div class="live-controls">
-            <button id="sync-live-btn" class="sync-btn"><i class="fa-solid fa-cloud-arrow-down"></i> Sync Feed</button>
+            <button id="sync-live-btn" class="sync-btn"><i class="fa-solid fa-cloud-arrow-down"></i> Sync Daily Feed</button>
         </div>
     </header>
 
     <div class="app-container">
         <aside class="sidebar">
+            <div class="timeline-filter">
+                <h3>Archive Timeline</h3>
+                <select id="month-selector" class="styled-dropdown">
+                    <option value="all">All Months (2026)</option>
+                    <option value="May">May 2026</option>
+                </select>
+            </div>
+            <hr class="nav-divider">
             <h3>Syllabus Pillars</h3>
             <ul class="pillar-list">
-                <li class="active" data-pillar="all">Show All</li>
-                <li data-pillar="polity">Polity</li>
-                <li data-pillar="economy">Economy</li>
-                <li data-pillar="environment">Environment</li>
+                <li class="active" data-pillar="all"><i class="fa-solid fa-border-all"></i> Show All</li>
+                <li data-pillar="polity"><i class="fa-solid fa-scale-balanced"></i> Polity</li>
+                <li data-pillar="economy"><i class="fa-solid fa-chart-line"></i> Economy</li>
+                <li data-pillar="environment"><i class="fa-solid fa-seedling"></i> Environment</li>
             </ul>
         </aside>
+
         <main class="feed-window">
+            <div class="feed-header">
+                <h2 id="feed-title">Latest Bulletins</h2>
+                <span id="feed-status-tag" class="status-indicator">Local Database Active</span>
+            </div>
             <div class="articles-grid"></div>
         </main>
     </div>
@@ -36,7 +49,6 @@
             <div id="content-area"></div>
         </div>
     </div>
-
     <script src="app.js"></script>
 </body>
 </html>
