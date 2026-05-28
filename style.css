@@ -147,3 +147,15 @@ body { background-color: var(--bg-dark); color: var(--text-main); overflow-x: hi
         margin: auto !important;
     }
 }
+/* Fix the Modal Readability */
+#article-reader-overlay {
+    background: rgba(0, 0, 0, 0.9) !important; /* Dark solid background */
+}
+
+#reader-modal-body {
+    background: #ffffff !important; /* Pure white content area */
+    color: #333333 !important;      /* Dark text for contrast */
+    padding: 40px !important;
+    border-radius: 12px;
+    max-width: 700px;
+}
