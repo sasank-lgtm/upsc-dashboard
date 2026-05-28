@@ -5,12 +5,13 @@ import os
 import datetime
 
 def fetch_live_updates():
+    # Fetching current affairs metadata from a reliable, open national stream feed
     url = "https://www.thehindu.com/news/national/feeder/default.rss"
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
     req = urllib.request.Request(url, headers=headers)
     
     try:
-        with urllib.request.urlopen(req, timeout=10) as response:
+        with urllib.request.urlopen(req, timeout=15) as response:
             xml_data = response.read()
         root = ET.fromstring(xml_data)
     except Exception as e:
@@ -22,12 +23,13 @@ def fetch_live_updates():
     if not items:
         return []
 
+    # Process the top 4 latest breaking national policy updates
     for item in items[:4]:
         title = item.find('title').text if item.find('title') is not None else 'National Policy Bulletin'
         link = item.find('link').text if item.find('link') is not None else 'https://pib.gov.in'
         desc = item.find('description').text if item.find('description') is not None else 'Current structural metrics updated.'
         
-        if "<" in desc:
+        if desc and "<" in desc:
             desc = desc.split("<")[0]
 
         current_date = datetime.datetime.now()
@@ -63,6 +65,7 @@ def update_database():
         print("No live elements fetched.")
         return
 
+    # Generate layout structure and inject data smoothly
     js_content = f"const upscDatabase = {json.dumps(live_data, indent=4)};\n\nlet activeSourceFilter = \"\";\n\n" + """
 function renderDashboard() {
     const grid = document.querySelector('.articles-grid');
