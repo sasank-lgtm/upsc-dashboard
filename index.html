@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPSC 2026 Core Current Affairs Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo"><i class="fa-solid fa-graduation-cap"></i> UPSC CSE 2026 CA Deck</div>
+        
+        <div class="live-controls">
+            <button id="sync-live-btn" class="sync-btn"><i class="fa-solid fa-cloud-arrow-down"></i> Sync Daily Live Feed</button>
+            <div class="source-badges">
+                <span class="badge pib">PIB India</span>
+                <span class="badge govt">Govt Portals</span>
+                <span class="badge news">The Hindu / IE</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="timeline-filter">
+                <h3>Archive Timeline</h3>
+               <select id="month-selector" class="styled-dropdown">
+    <option value="all-months">All Months (2026)</option>
+    <option value="May">May 2026 (Post-Prelims)</option>
+    <option value="April">April 2026</option>
+    <option value="March">March 2026</option>
+    <option value="February">February 2026</option>
+    <option value="January">January 2026</option>
+</select>
+            </div>
+            
+            <hr class="nav-divider">
+
+            <h3>Syllabus Pillars</h3>
+            <ul class="pillar-list">
+                <li class="active" data-pillar="all"><i class="fa-solid fa-border-all"></i> Show All Sectors</li>
+                <li data-pillar="polity"><i class="fa-solid fa-scale-balanced"></i> Polity & Governance</li>
+                <li data-pillar="economy"><i class="fa-solid fa-chart-line"></i> Economy & Infrastructure</li>
+                <li data-pillar="environment"><i class="fa-solid fa-seedling"></i> Environment & Ecology</li>
+                <li data-pillar="science"><i class="fa-solid fa-atom"></i> Science & Technology</li>
+            </ul>
+        </aside>
+
+        <main class="feed-window">
+            <div class="feed-header">
+                <h2 id="feed-title">Latest Prelims & Mains Relevant Bulletins</h2>
+                <span id="feed-status-tag" class="status-indicator">Local Database Active</span>
+            </div>
+            
+            <div class="articles-grid">
+                </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
