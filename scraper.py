@@ -1,55 +1,47 @@
+import urllib.request
+import xml.etree.ElementTree as ET
 import json
 import datetime
 
-def generate_daily_bulletins():
-    current_date = datetime.datetime.now()
-    month_str = current_date.strftime("%B")
-    time_str = current_date.strftime("%B %d, %Y")
+def fetch_live_data():
+    # Fetching live national news stream
+    url = "https://www.thehindu.com/news/national/feeder/default.rss"
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    req = urllib.request.Request(url, headers=headers)
+    
+    try:
+        with urllib.request.urlopen(req, timeout=10) as response:
+            root = ET.fromstring(response.read())
+    except Exception as e:
+        print(f"Fetch error: {e}")
+        return []
 
-    # Pure database storage optimized for UPSC CSE Core Pillars
-    bulletins = [
-        {
-            "month": month_str,
-            "pillar": "polity",
-            "source": "PIB Delhi / Law Commission",
-            "time": f"{time_str}",
-            "sourceUrl": "https://pib.gov.in",
-            "title": "Delimitation Commission Framework & Constitutional Balancing Metrics",
-            "summary": "Analyses structural parameters for updating territorial constituencies under Article 82 based on demographic shifts.",
-            "fullAnalysis": "The upcoming Delimitation exercise introduces structural changes to India's federal legislative architecture.\\n\\nFrom a UPSC Mains perspective (GS Paper II), this involves balancing democratic representation with administrative equity. Key bottlenecks include the potential under-representation of states that successfully implemented family planning initiatives, introducing friction into horizontal fiscal and political allocations.\\n\\nAddressing these systemic challenges requires establishing robust balancing formulas, such as capping legislative seat reallocations or weighting representation alongside regional development indices, to maintain federal harmony.",
-            "prelimsSummary": "* **Constitutional Pivot:** Governed explicitly under Article 82 and Article 170.\\n* **Historical Precedent:** The 84th Constitutional Amendment Act froze seat numbers based on the 1971 census until the first census after 2026.\\n* **Operational Mandate:** The Commission's executive orders carry the force of law and cannot be called into question before any court."
-        },
-        {
-            "month": month_str,
-            "pillar": "economy",
-            "source": "Reserve Bank of India (RBI)",
-            "time": f"{time_str}",
-            "sourceUrl": "https://www.rbi.org.in",
-            "title": "Central Bank Digital Currency (e-Rupee) Architecture & Interoperability",
-            "summary": "RBI expanding retail pilot frameworks for retail CBDCs to increase transaction resilience and cross-border settlement speeds.",
-            "fullAnalysis": "The phased scaling of the Central Bank Digital Currency (CBDC) represents a major upgrade in India's sovereign monetary control engine.\\n\\nIn the context of GS Paper III Economy, integrating retail tokenized e-Rupee models directly into existing UPI architectures optimizes operational efficiency by reducing physical currency management costs. However, major system bottlenecks include offline transaction validation, privacy protection, and cybersecurity risks under sudden transaction loads.\\n\\nLong-term stability requires deploying tiered encryption systems and clear legal structures for digital anonymity to balance compliance with user trust.",
-            "prelimsSummary": "* **Legal Footing:** Enabled via structural amendments to the Reserve Bank of India (RBI) Act, 1934.\\n* **Sovereign Profile:** CBDC is a digital token representing legal tender; it acts as a direct liability on the central bank's balance sheet.\\n* **Core Utility:** Operates as a fungible medium of exchange, store of value, and unit of account without requiring a commercial bank intermediary."
-        },
-        {
-            "month": month_str,
-            "pillar": "environment",
-            "source": "MoEFCC / Central Pollution Control Board",
-            "time": f"{time_str}",
-            "sourceUrl": "https://cpcb.nic.in",
-            "title": "Eco-Sensitive Zones (ESZ) Regulation & Western Ghats Biological Conservation",
-            "summary": "National mandates specify strict eco-protection buffer zones surrounding critical wildlife reserves and national parks.",
-            "fullAnalysis": "Enforcing Eco-Sensitive Zones (ESZs) highlights the ongoing tension between local development demands and ecological preservation frameworks.\\n\\nFor GS Paper III Environment, managing these buffer networks is essential to mitigate human-wildlife conflict and maintain contiguous migratory corridors. The primary challenge involves regulatory implementation friction—local communities often push back due to sudden restrictions on farming and infrastructure construction.\\n\\nResolving this requires moving from a top-down regulatory model to a community-led model, offering green compensation incentives and promoting sustainable eco-tourism frameworks.",
-            "prelimsSummary": "* **Statutory Backbone:** Notified directly under the Environment (Protection) Act, 1986.\\n* **Spatial Boundaries:** Shock-absorbing buffers generally extend up to 10 kilometers around Protected Areas, though width can vary dynamically based on ecological sensitivity.\\n* **Regulatory Profile:** Prohibits commercial mining, polluting industries, and large hydroelectric projects, while regulating commercial construction through localized master plans."
-        }
-    ]
-    return bulletins
+    articles = []
+    for item in root.findall('.//item')[:5]:
+        title = item.find('title').text
+        link = item.find('link').text
+        desc = (item.find('description').text or "").split("<")[0]
+        
+        # Determine UPSC Pillar based on keywords
+        pillar = "polity"
+        t_low = title.lower()
+        if any(w in t_low for w in ["economy", "rbi", "gdp", "finance"]): pillar = "economy"
+        elif any(w in t_low for w in ["environment", "climate", "forest"]): pillar = "environment"
+        elif any(w in t_low for w in ["science", "tech", "isro"]): pillar = "science"
 
-def update_database():
-    live_data = generate_daily_bulletins()
-    # Save purely as raw data to eliminate code template syntax clashes
-    with open("data.json", "w", encoding="utf-8") as f:
-        json.dump(live_data, f, indent=4)
-    print("Clean JSON generation run complete!")
+        articles.append({
+            "month": datetime.datetime.now().strftime("%B"),
+            "pillar": pillar,
+            "source": "The Hindu / National Feed",
+            "time": datetime.datetime.now().strftime("%B %d, %Y"),
+            "sourceUrl": link,
+            "title": title,
+            "summary": desc[:120] + "...",
+            "fullAnalysis": "Live feed analysis: This article relates to core UPSC syllabus components. Reviewing structural implications for administrative reform and resource allocation.",
+            "prelimsSummary": "* **Core Context:** Real-time news aggregation.\n* **Relevant Pillars:** " + pillar.capitalize()
+        })
+    return articles
 
-if __name__ == "__main__":
-    update_database()
+# Save live data
+with open("data.json", "w") as f:
+    json.dump(fetch_live_data(), f, indent=4)
