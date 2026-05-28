@@ -1,57 +1,81 @@
+// ====================================================
+// UPSC 2026 DASHBOARD - CORE ENGINE
+// ====================================================
 let upscDatabase = [];
 
-async function initDashboard() {
-    console.log("Initializing Dashboard...");
+// 1. DATA LOADER: Fetches live data from the JSON engine
+async function loadData() {
     try {
-        const response = await fetch('data.json?v=' + new Date().getTime());
+        const response = await fetch('data.json?t=' + new Date().getTime());
+        if (!response.ok) throw new Error('Data sync failed');
         upscDatabase = await response.json();
-        console.log("Data loaded:", upscDatabase);
         renderDashboard();
-    } catch (e) {
-        console.error("Fetch failed. Trying local mock data.");
-        // Fallback if fetch fails
-        upscDatabase = [{ title: "System Ready", pillar: "polity", source: "Internal", time: "Now", summary: "Data loaded", fullAnalysis: "System online.", prelimsSummary: "Ready." }];
-        renderDashboard();
+    } catch (err) {
+        console.error("Dashboard Engine Error:", err);
+        document.querySelector('.articles-grid').innerHTML = '<p style="text-align:center;">Failed to load data. Please click Sync to refresh.</p>';
     }
 }
 
+// 2. RENDERER: Builds the UI cards dynamically
 function renderDashboard() {
     const grid = document.querySelector('.articles-grid');
     if (!grid) return;
     grid.innerHTML = '';
 
-    const chosenMonth = document.getElementById('month-selector').value;
-    const activeLi = document.querySelector('.pillar-list li.active');
-    const chosenPillar = activeLi ? activeLi.getAttribute('data-pillar') : 'all';
+    const activePillar = document.querySelector('.pillar-list li.active')?.getAttribute('data-pillar') || 'all';
 
-    upscDatabase.filter(item => {
-        return (chosenMonth === "all-months" || item.month === chosenMonth) &&
-               (chosenPillar === "all" || item.pillar === chosenPillar);
-    }).forEach((article, index) => {
+    const filtered = upscDatabase.filter(item => 
+        activePillar === 'all' || item.pillar === activePillar
+    );
+
+    filtered.forEach((article, index) => {
         const card = document.createElement('div');
         card.className = 'card';
-        card.innerHTML = `<h3>${article.title}</h3><button class="open-article-btn" data-index="${index}">Read</button>`;
+        card.innerHTML = `
+            <div class="card-header">
+                <span class="source-tag">${article.source}</span>
+                <span class="time-tag">${article.time}</span>
+            </div>
+            <h3>${article.title}</h3>
+            <p>${article.summary}</p>
+            <button class="open-article-btn" data-index="${index}">Read Full Analysis</button>
+        `;
         grid.appendChild(card);
     });
 
-    // Re-bind all click events
+    // Re-bind click events after render
     document.querySelectorAll('.open-article-btn').forEach(btn => {
         btn.onclick = (e) => {
             const idx = e.target.getAttribute('data-index');
-            openInAppReader(upscDatabase[idx]);
+            openInAppReader(filtered[idx]);
         };
     });
 }
 
+// 3. MODAL MANAGER: Displays article in the overlay
 function openInAppReader(article) {
-    document.getElementById('article-reader-overlay').style.display = 'flex';
-    document.getElementById('reader-modal-body').innerHTML = `<h1>${article.title}</h1><p>${article.fullAnalysis}</p>`;
+    const modal = document.getElementById('article-reader-overlay');
+    const body = document.getElementById('reader-modal-body');
+    
+    if (modal && body) {
+        body.innerHTML = `
+            <h1>${article.title}</h1>
+            <p><strong>Source:</strong> ${article.source}</p>
+            <div style="margin:20px 0;">${article.fullAnalysis.replace(/\\n/g, '<br><br>')}</div>
+            <div style="background:#f8fafc; padding:15px; border-radius:8px; border-left:4px solid #3b82f6;">
+                <h3>Key Prelims Facts</h3>
+                <p>${article.prelimsSummary.replace(/\\n/g, '<br>')}</p>
+            </div>
+        `;
+        modal.style.display = 'flex';
+    }
 }
 
-// Attach filters to window so they are always available
-window.onload = () => {
-    initDashboard();
-    document.getElementById('month-selector').onchange = renderDashboard;
+// 4. INITIALIZER: Bind events on load
+document.addEventListener('DOMContentLoaded', () => {
+    loadData();
+
+    // Bind Filter List
     document.querySelectorAll('.pillar-list li').forEach(li => {
         li.onclick = () => {
             document.querySelector('.pillar-list li.active')?.classList.remove('active');
@@ -59,4 +83,15 @@ window.onload = () => {
             renderDashboard();
         };
     });
-};
+
+    // Bind Sync Button
+    document.getElementById('sync-live-btn')?.addEventListener('click', () => {
+        alert("Automation active: GitHub Actions is handling the sync. Check your repository Actions tab to see the live progress.");
+    });
+
+    // Bind Modal Close
+    window.onclick = (e) => {
+        const modal = document.getElementById('article-reader-overlay');
+        if (e.target === modal) modal.style.display = 'none';
+    };
+});
