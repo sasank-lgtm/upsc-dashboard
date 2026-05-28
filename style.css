@@ -13,3 +13,15 @@ body { background: #121214; color: #e2e8f0; }
 #article-reader-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center; }
 #reader-modal-body { background: white; color: #333; padding: 30px; width: 80%; max-width: 700px; max-height: 80vh; overflow-y: auto; border-radius: 12px; }
 #close-modal-btn { float: right; cursor: pointer; padding: 5px 10px; }
+/* Keep Navbar on top */
+.navbar { position: relative; z-index: 2000; }
+.sidebar { position: relative; z-index: 1000; }
+
+/* Keep Modal on top of everything but below Navbar */
+#article-reader-overlay { 
+    display: none; 
+    position: fixed; top:0; left:0; width:100%; height:100%; 
+    background: rgba(0,0,0,0.9); 
+    z-index: 9999; 
+    justify-content: center; align-items: center; 
+}
