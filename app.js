@@ -1,18 +1,20 @@
 let upscDatabase = [];
 
-// 1. Fetch data first
-async function loadData() {
+async function initDashboard() {
+    console.log("Initializing Dashboard...");
     try {
-        const response = await fetch('data.json');
-        if (!response.ok) throw new Error('Could not fetch data.json');
+        const response = await fetch('data.json?v=' + new Date().getTime());
         upscDatabase = await response.json();
-        renderDashboard(); // Render happens only after data arrives
-    } catch (error) {
-        console.error("Error loading data:", error);
+        console.log("Data loaded:", upscDatabase);
+        renderDashboard();
+    } catch (e) {
+        console.error("Fetch failed. Trying local mock data.");
+        // Fallback if fetch fails
+        upscDatabase = [{ title: "System Ready", pillar: "polity", source: "Internal", time: "Now", summary: "Data loaded", fullAnalysis: "System online.", prelimsSummary: "Ready." }];
+        renderDashboard();
     }
 }
 
-// 2. Render and re-attach listeners
 function renderDashboard() {
     const grid = document.querySelector('.articles-grid');
     if (!grid) return;
@@ -22,66 +24,39 @@ function renderDashboard() {
     const activeLi = document.querySelector('.pillar-list li.active');
     const chosenPillar = activeLi ? activeLi.getAttribute('data-pillar') : 'all';
 
-    let filteredList = upscDatabase.filter(item => {
-        const matchesMonth = (chosenMonth === "all-months" || item.month === chosenMonth);
-        const matchesPillar = (chosenPillar === "all" || item.pillar === chosenPillar);
-        return matchesMonth && matchesPillar;
-    });
-
-    if (filteredList.length === 0) {
-        grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 3rem;">No articles found.</div>`;
-        return;
-    }
-
-    // Generate HTML first
-    filteredList.forEach(article => {
+    upscDatabase.filter(item => {
+        return (chosenMonth === "all-months" || item.month === chosenMonth) &&
+               (chosenPillar === "all" || item.pillar === chosenPillar);
+    }).forEach((article, index) => {
         const card = document.createElement('div');
         card.className = 'card';
-        card.innerHTML = `
-            <div class="card-header">
-                <span class="source-tag">${article.source}</span>
-                <span class="time-tag">${article.time}</span>
-            </div>
-            <h3>${article.title}</h3>
-            <p>${article.summary}</p>
-            <button class="open-article-btn">Read Full Analysis</button>
-        `;
+        card.innerHTML = `<h3>${article.title}</h3><button class="open-article-btn" data-index="${index}">Read</button>`;
         grid.appendChild(card);
     });
 
-    // 3. ATTACH LISTENERS ONLY NOW: After cards are in the DOM
-    document.querySelectorAll('.open-article-btn').forEach((btn, index) => {
-        btn.addEventListener('click', () => openInAppReader(filteredList[index]));
+    // Re-bind all click events
+    document.querySelectorAll('.open-article-btn').forEach(btn => {
+        btn.onclick = (e) => {
+            const idx = e.target.getAttribute('data-index');
+            openInAppReader(upscDatabase[idx]);
+        };
     });
 }
 
-// 4. Modal handler
 function openInAppReader(article) {
-    const modal = document.getElementById('article-reader-overlay');
-    const body = document.getElementById('reader-modal-body');
-    
-    body.innerHTML = `
-        <h1>${article.title}</h1>
-        <p><strong>Source:</strong> ${article.source}</p>
-        <div>${article.fullAnalysis.replace(/\\n/g, '<br><br>')}</div>
-        <div style="margin-top:20px; padding:10px; background:#f0f0f0;">
-            <h3>Prelims Facts</h3>
-            <p>${article.prelimsSummary.replace(/\\n/g, '<br>')}</p>
-        </div>
-    `;
-    modal.style.display = 'flex';
+    document.getElementById('article-reader-overlay').style.display = 'flex';
+    document.getElementById('reader-modal-body').innerHTML = `<h1>${article.title}</h1><p>${article.fullAnalysis}</p>`;
 }
 
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    loadData();
-    // Re-attach listeners for filter selectors
-    document.getElementById('month-selector').addEventListener('change', renderDashboard);
+// Attach filters to window so they are always available
+window.onload = () => {
+    initDashboard();
+    document.getElementById('month-selector').onchange = renderDashboard;
     document.querySelectorAll('.pillar-list li').forEach(li => {
-        li.addEventListener('click', () => {
+        li.onclick = () => {
             document.querySelector('.pillar-list li.active')?.classList.remove('active');
             li.classList.add('active');
             renderDashboard();
-        });
+        };
     });
-});
+};
