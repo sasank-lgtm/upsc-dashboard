@@ -2,34 +2,67 @@
     {
         "month": "May",
         "pillar": "polity",
-        "source": "PIB Delhi / Law Commission",
+        "source": "The Hindu",
         "time": "May 28, 2026",
-        "sourceUrl": "https://pib.gov.in",
-        "title": "Delimitation Commission Framework & Constitutional Balancing Metrics",
-        "summary": "Analyses structural parameters for updating territorial constituencies under Article 82 based on demographic shifts.",
-        "fullAnalysis": "The upcoming Delimitation exercise introduces structural changes to India's federal legislative architecture.\\n\\nFrom a UPSC Mains perspective (GS Paper II), this involves balancing democratic representation with administrative equity. Key bottlenecks include the potential under-representation of states that successfully implemented family planning initiatives, introducing friction into horizontal fiscal and political allocations.\\n\\nAddressing these systemic challenges requires establishing robust balancing formulas, such as capping legislative seat reallocations or weighting representation alongside regional development indices, to maintain federal harmony.",
-        "prelimsSummary": "* **Constitutional Pivot:** Governed explicitly under Article 82 and Article 170.\\n* **Historical Precedent:** The 84th Constitutional Amendment Act froze seat numbers based on the 1971 census until the first census after 2026.\\n* **Operational Mandate:** The Commission's executive orders carry the force of law and cannot be called into question before any court."
+        "sourceUrl": "https://www.thehindu.com/news/national/andhra-pradesh/indrakeeladri-ghat-road-repair-works-halted-due-to-heatwave-in-vijayawada/article71033852.ece",
+        "title": "Indrakeeladri Ghat road repair works halted due to heatwave in Vijayawada",
+        "summary": "The works will resume after weather conditions become normal, say the authorities, adding that vehicles will be allowed on the Ghat Road as usual from...",
+        "fullAnalysis": "Analysis based on The Hindu report. Visit source for deep-dive: https://www.thehindu.com/news/national/andhra-pradesh/indrakeeladri-ghat-road-repair-works-halted-due-to-heatwave-in-vijayawada/article71033852.ece",
+        "prelimsSummary": "* **Source:** The Hindu\\n* **URL:** https://www.thehindu.com/news/national/andhra-pradesh/indrakeeladri-ghat-road-repair-works-halted-due-to-heatwave-in-vijayawada/article71033852.ece"
     },
     {
         "month": "May",
-        "pillar": "economy",
-        "source": "Reserve Bank of India (RBI)",
+        "pillar": "polity",
+        "source": "The Hindu",
         "time": "May 28, 2026",
-        "sourceUrl": "https://www.rbi.org.in",
-        "title": "Central Bank Digital Currency (e-Rupee) Architecture & Interoperability",
-        "summary": "RBI expanding retail pilot frameworks for retail CBDCs to increase transaction resilience and cross-border settlement speeds.",
-        "fullAnalysis": "The phased scaling of the Central Bank Digital Currency (CBDC) represents a major upgrade in India's sovereign monetary control engine.\\n\\nIn the context of GS Paper III Economy, integrating retail tokenized e-Rupee models directly into existing UPI architectures optimizes operational efficiency by reducing physical currency management costs. However, major system bottlenecks include offline transaction validation, privacy protection, and cybersecurity risks under sudden transaction loads.\\n\\nLong-term stability requires deploying tiered encryption systems and clear legal structures for digital anonymity to balance compliance with user trust.",
-        "prelimsSummary": "* **Legal Footing:** Enabled via structural amendments to the Reserve Bank of India (RBI) Act, 1934.\\n* **Sovereign Profile:** CBDC is a digital token representing legal tender; it acts as a direct liability on the central bank's balance sheet.\\n* **Core Utility:** Operates as a fungible medium of exchange, store of value, and unit of account without requiring a commercial bank intermediary."
+        "sourceUrl": "https://www.thehindu.com/news/national/telangana/revanth-reddy-hails-ntr-as-a-leader-beyond-politics/article71034459.ece",
+        "title": "Revanth Reddy hails NTR as a leader beyond politics",
+        "summary": "Unveiling\u00a0TDP\u00a0founder\u2019s statue, CM said\u00a0NTR\u00a0gave political power to downtrodden\u00a0by abolishing \u2018Patel\u00a0Patwari\u2019 system, and empowering women by making t...",
+        "fullAnalysis": "Analysis based on The Hindu report. Visit source for deep-dive: https://www.thehindu.com/news/national/telangana/revanth-reddy-hails-ntr-as-a-leader-beyond-politics/article71034459.ece",
+        "prelimsSummary": "* **Source:** The Hindu\\n* **URL:** https://www.thehindu.com/news/national/telangana/revanth-reddy-hails-ntr-as-a-leader-beyond-politics/article71034459.ece"
     },
     {
         "month": "May",
-        "pillar": "environment",
-        "source": "MoEFCC / Central Pollution Control Board",
+        "pillar": "polity",
+        "source": "The Hindu",
         "time": "May 28, 2026",
-        "sourceUrl": "https://cpcb.nic.in",
-        "title": "Eco-Sensitive Zones (ESZ) Regulation & Western Ghats Biological Conservation",
-        "summary": "National mandates specify strict eco-protection buffer zones surrounding critical wildlife reserves and national parks.",
-        "fullAnalysis": "Enforcing Eco-Sensitive Zones (ESZs) highlights the ongoing tension between local development demands and ecological preservation frameworks.\\n\\nFor GS Paper III Environment, managing these buffer networks is essential to mitigate human-wildlife conflict and maintain contiguous migratory corridors. The primary challenge involves regulatory implementation friction\u2014local communities often push back due to sudden restrictions on farming and infrastructure construction.\\n\\nResolving this requires moving from a top-down regulatory model to a community-led model, offering green compensation incentives and promoting sustainable eco-tourism frameworks.",
-        "prelimsSummary": "* **Statutory Backbone:** Notified directly under the Environment (Protection) Act, 1986.\\n* **Spatial Boundaries:** Shock-absorbing buffers generally extend up to 10 kilometers around Protected Areas, though width can vary dynamically based on ecological sensitivity.\\n* **Regulatory Profile:** Prohibits commercial mining, polluting industries, and large hydroelectric projects, while regulating commercial construction through localized master plans."
+        "sourceUrl": "https://www.thehindu.com/news/national/andhra-pradesh/visakhapatnam-collector-sets-june-30-deadline-for-bhogapuram-airport-roads/article71032566.ece",
+        "title": "Visakhapatnam Collector sets June 30 deadline for Bhogapuram airport roads",
+        "summary": "Ahead of the Alluri Sitarama Raju International Airport\u2019s opening in early July, Collector M. Abhishikth Kishore asks departments to finish road and c...",
+        "fullAnalysis": "Analysis based on The Hindu report. Visit source for deep-dive: https://www.thehindu.com/news/national/andhra-pradesh/visakhapatnam-collector-sets-june-30-deadline-for-bhogapuram-airport-roads/article71032566.ece",
+        "prelimsSummary": "* **Source:** The Hindu\\n* **URL:** https://www.thehindu.com/news/national/andhra-pradesh/visakhapatnam-collector-sets-june-30-deadline-for-bhogapuram-airport-roads/article71032566.ece"
+    },
+    {
+        "month": "May",
+        "pillar": "polity",
+        "source": "Indian Express",
+        "time": "May 28, 2026",
+        "sourceUrl": "https://indianexpress.com/article/sports/cricket/hardik-pandya-to-lose-mumbai-indians-captaincy-breaking-ipl-10712761/",
+        "title": "BREAKING: Hardik Pandya set to lose Mumbai Indians captaincy",
+        "summary": "No summary available....",
+        "fullAnalysis": "Analysis based on Indian Express report. Visit source for deep-dive: https://indianexpress.com/article/sports/cricket/hardik-pandya-to-lose-mumbai-indians-captaincy-breaking-ipl-10712761/",
+        "prelimsSummary": "* **Source:** Indian Express\\n* **URL:** https://indianexpress.com/article/sports/cricket/hardik-pandya-to-lose-mumbai-indians-captaincy-breaking-ipl-10712761/"
+    },
+    {
+        "month": "May",
+        "pillar": "polity",
+        "source": "Indian Express",
+        "time": "May 28, 2026",
+        "sourceUrl": "https://indianexpress.com/article/lifestyle/destination-of-the-week/8-breathtaking-pink-lakes-around-the-world-10706777/",
+        "title": "8 breathtaking pink lakes around the world",
+        "summary": "No summary available....",
+        "fullAnalysis": "Analysis based on Indian Express report. Visit source for deep-dive: https://indianexpress.com/article/lifestyle/destination-of-the-week/8-breathtaking-pink-lakes-around-the-world-10706777/",
+        "prelimsSummary": "* **Source:** Indian Express\\n* **URL:** https://indianexpress.com/article/lifestyle/destination-of-the-week/8-breathtaking-pink-lakes-around-the-world-10706777/"
+    },
+    {
+        "month": "May",
+        "pillar": "polity",
+        "source": "Indian Express",
+        "time": "May 28, 2026",
+        "sourceUrl": "https://indianexpress.com/article/world/us-iran-60-day-ceasefire-extension-donald-trump-nuclear-talks-10712954/",
+        "title": "US reaches 60-day truce \u2018deal\u2019 with Iran, but Trump approval pending: Report",
+        "summary": "No summary available....",
+        "fullAnalysis": "Analysis based on Indian Express report. Visit source for deep-dive: https://indianexpress.com/article/world/us-iran-60-day-ceasefire-extension-donald-trump-nuclear-talks-10712954/",
+        "prelimsSummary": "* **Source:** Indian Express\\n* **URL:** https://indianexpress.com/article/world/us-iran-60-day-ceasefire-extension-donald-trump-nuclear-talks-10712954/"
     }
 ]
